@@ -9,8 +9,6 @@ import android.net.VpnService
 import android.os.Build
 import android.os.ParcelFileDescriptor
 import androidx.core.app.NotificationCompat
-import java.io.File
-// Laptop တွင် libv2ray.aar ထည့်ပြီးပါက ဤ import ပွင့်လာမည်ဖြစ်သည်
 import libv2ray.Libv2ray
 
 class GalaxyVpnService : VpnService() {
@@ -47,25 +45,16 @@ class GalaxyVpnService : VpnService() {
         isRunning = true
 
         try {
-            // ၁။ V2Ray Core Engine အား JSON Config ဖြင့် အရင်ဆုံး စတင်နှိုးခြင်း
-            Libv2ray.startCore(configJson)
+            Libv2ray.StartCore(configJson)
 
-            // ၂။ Android ရဲ့ VPN Tunnel လမ်းကြောင်းကို တည်ဆောက်ခြင်း
             val builder = Builder()
             vpnInterface = builder.setSession("Galaxy Tunnel")
-                .addAddress("26.26.26.1", 30) // Local Virtual IP
-                .addRoute("0.0.0.0", 0)       // ဖုန်းတစ်ခုလုံး၏ Traffic ကို လမ်းကြောင်းလွှဲခြင်း
+                .addAddress("26.26.26.1", 30)
+                .addRoute("0.0.0.0", 0)
                 .addDnsServer("8.8.8.8")
                 .setMtu(1500)
                 .establish()
 
-            // ၃။ ရလာသော File Descriptor (fd) အား V2Ray Core ထံ သို့ လွှဲပြောင်းပေးရမည်
-            val fd = vpnInterface?.fd ?: -1
-            if (fd != -1) {
-                Libv2ray.bindFd(fd)
-            }
-
-            // Notification ပြသခြင်းစနစ်
             showNotification(serverName)
 
         } catch (e: Exception) {
@@ -97,9 +86,7 @@ class GalaxyVpnService : VpnService() {
     private fun stopV2RayEngine() {
         isRunning = false
         try {
-            // V2Ray Core အား ရပ်တန့်ခြင်း
-            Libv2ray.stopCore()
-            
+            Libv2ray.StopCore()
             vpnInterface?.close()
             vpnInterface = null
         } catch (e: Exception) {
