@@ -7,13 +7,14 @@ plugins {
 }
 
 android {
+android {
     namespace = "com.example"
-    compileSdk = 37          // ← 35 မှ 37 ကို ပြောင်း
+    compileSdk = 37
 
     defaultConfig {
         applicationId = "com.aistudio.galaxytunnel.vjrmqx"
         minSdk = 24
-        targetSdk = 37       // ← 35 မှ 37 ကို ပြောင်း
+        targetSdk = 37
         versionCode = 1
         versionName = "1.0"
 
@@ -55,8 +56,17 @@ android {
         compose = true
         buildConfig = true
     }
+    
     testOptions { unitTests { isIncludeAndroidResources = true } }
+    
+    // ← ဒီအပိုင်း ထည့်
+    sourceSets {
+        getByName("main") {
+            jniLibs.srcDir("libs")
+        }
+    }
 }
+
 
 secrets {
     propertiesFileName = ".env"
