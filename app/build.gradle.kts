@@ -6,14 +6,35 @@ plugins {
     alias(libs.plugins.secrets)
 }
 
+// ← libv2ray.aar build task (submodule)
+tasks.register<Exec>("buildLibv2ray") {
+    group = "build"
+    description = "Build libv2ray.aar from AndroidLibXrayLite submodule"
+    
+    commandLine("sh", "-c", """
+        cd AndroidLibXrayLite &&
+        go mod tidy &&
+        gomobile bind -v -androidapi 24 -o ../app/libs/libv2ray.aar ./libv2ray
+    """.trimIndent())
+    
+    // Only run if AAR doesn't exist or submodule is newer
+    outputs.file(file("app/libs/libv2ray.aar"))
+    inputs.dir(file("AndroidLibXrayLite"))
+}
+
+// Make assemble tasks depend on libv2ray build
+tasks.named("preBuild") {
+    dependsOn("buildLibv2ray")
+}
+
 android {
     namespace = "com.example"
-    compileSdk = 36          // ← 37 မှ 36 ကို ပြောင်း
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "com.aistudio.galaxytunnel.vjrmqx"
         minSdk = 24
-        targetSdk = 36       // ← 37 မှ 36 ကို ပြောင်း
+        targetSdk = 36
         versionCode = 1
         versionName = "1.0"
 
