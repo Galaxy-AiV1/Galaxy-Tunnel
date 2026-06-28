@@ -1,0 +1,6 @@
+{
+  "name": "Galaxy Tunnel",
+  "description": "Secure. Fast. Limitless VPN Client — Your Gateway to the Digital World",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
