@@ -8,7 +8,7 @@ plugins {
 
 android {
   namespace = "com.example"
-  compileSdk = 35 // SDK 36 အတွက် Gradle 9 သီးသန့်လိုနိုင်၍ ပိုမိုငြိမ်သက်သော SDK 35 ဖြင့် ခေတ္တ build ကြည့်နိုင်ပါသည်
+  compileSdk = 35
 
   defaultConfig {
     applicationId = "com.aistudio.galaxytunnel.vjrmqx"
@@ -41,20 +41,14 @@ android {
       isCrunchPngs = false
       isMinifyEnabled = false
       proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
-      // signingConfig = signingConfigs.getByName("release")
     }
     debug {
-      // README အရ Error မတက်အောင် signingConfig လိုင်းကို ဖယ်ရှားထားပါတယ်
     }
   }
-  
-  // 💡 ဤနေရာတွင် GitHub Actions နှင့် ကိုက်ညီအောင် Java 17 သို့ ပြောင်းလဲထားပါသည်
+
   compileOptions {
     sourceCompatibility = JavaVersion.VERSION_17
     targetCompatibility = JavaVersion.VERSION_17
-  }
-  
-  // 
   }
 
   buildFeatures {
@@ -70,7 +64,6 @@ secrets {
 }
 
 dependencies {
-  // 🔗 app/libs/ ထဲရှိ .aar နှင့် .jar ဖိုင်များကို ချိတ်ဆက်ခြင်း
   implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar", "*.aar"))))
 
   implementation(platform(libs.androidx.compose.bom))
