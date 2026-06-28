@@ -8,12 +8,12 @@ plugins {
 
 android {
   namespace = "com.example"
-  compileSdk { version = release(36) { minorApiLevel = 1 } }
+  compileSdk = 35 // SDK 36 အတွက် Gradle 9 သီးသန့်လိုနိုင်၍ ပိုမိုငြိမ်သက်သော SDK 35 ဖြင့် ခေတ္တ build ကြည့်နိုင်ပါသည်
 
   defaultConfig {
     applicationId = "com.aistudio.galaxytunnel.vjrmqx"
     minSdk = 24
-    targetSdk = 36
+    targetSdk = 35
     versionCode = 1
     versionName = "1.0"
 
@@ -47,10 +47,18 @@ android {
       // README အရ Error မတက်အောင် signingConfig လိုင်းကို ဖယ်ရှားထားပါတယ်
     }
   }
+  
+  // 💡 ဤနေရာတွင် GitHub Actions နှင့် ကိုက်ညီအောင် Java 17 သို့ ပြောင်းလဲထားပါသည်
   compileOptions {
-    sourceCompatibility = JavaVersion.VERSION_11
-    targetCompatibility = JavaVersion.VERSION_11
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
   }
+  
+  // 💡 Kotlin Options ပါဝင်ပါက ၎င်းကိုလည်း Java 17 သို့ ညွှန်ပေးရပါမည်
+  kotlinOptions {
+    jvmTarget = "17"
+  }
+
   buildFeatures {
     compose = true
     buildConfig = true
@@ -64,7 +72,7 @@ secrets {
 }
 
 dependencies {
-  // ⬇️ ဒီနေရာမှာ ကွက်တိ လာထည့်ပေးလိုက်ပါဗျာ
+  // 🔗 app/libs/ ထဲရှိ .aar နှင့် .jar ဖိုင်များကို ချိတ်ဆက်ခြင်း
   implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar", "*.aar"))))
 
   implementation(platform(libs.androidx.compose.bom))
