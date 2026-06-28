@@ -13,7 +13,7 @@ jobs:
     steps:
     - uses: actions/checkout@v4
       with:
-        lfs: true          # ← LFS files (libv2ray.aar) ဆွဲဖို့လိုတယ်
+        lfs: true
 
     - name: Set up JDK 17
       uses: actions/setup-java@v4
@@ -25,13 +25,13 @@ jobs:
     - name: Setup Android SDK
       uses: android-actions/setup-android@v3
       with:
-        api-level: 37
-        build-tools: 37.0.0
+        api-level: 36
+        build-tools: 36.0.0
 
-    - name: Install Android SDK 37
+    - name: Install Android SDK 36
       run: |
-        sdkmanager "platforms;android-37"
-        sdkmanager "build-tools;37.0.0"
+        sdkmanager "platforms;android-36"
+        sdkmanager "build-tools;36.0.0"
 
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
