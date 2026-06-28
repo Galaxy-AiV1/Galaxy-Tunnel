@@ -21,9 +21,11 @@ jobs:
         distribution: 'temurin'
         cache: gradle
 
-    # gradlew မရှိတဲ့အတွက် တိုက်ရိုက် gradle command ကို သုံးပြီး build မယ်
+    # 💡 Gradle 9 အစား သင့် Project နှင့် ကိုက်ညီမည့် ပိုမိုတည်ငြိမ်သော Gradle 8.7 ကို သတ်မှတ်ပေးလိုက်ခြင်း
     - name: Setup Gradle
       uses: gradle/actions/setup-gradle@v4
+      with:
+        gradle-version: '8.7'
 
     - name: Build with Gradle
       run: gradle assembleDebug
