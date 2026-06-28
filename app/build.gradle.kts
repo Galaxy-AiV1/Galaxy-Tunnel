@@ -7,7 +7,6 @@ plugins {
 }
 
 android {
-android {
     namespace = "com.example"
     compileSdk = 37
 
@@ -59,14 +58,12 @@ android {
     
     testOptions { unitTests { isIncludeAndroidResources = true } }
     
-    // ← ဒီအပိုင်း ထည့်
     sourceSets {
         getByName("main") {
             jniLibs.srcDir("libs")
         }
     }
 }
-
 
 secrets {
     propertiesFileName = ".env"
