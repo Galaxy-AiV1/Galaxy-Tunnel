@@ -54,9 +54,7 @@ android {
     targetCompatibility = JavaVersion.VERSION_17
   }
   
-  // 💡 Kotlin Options ပါဝင်ပါက ၎င်းကိုလည်း Java 17 သို့ ညွှန်ပေးရပါမည်
-  kotlinOptions {
-    jvmTarget = "17"
+  // 
   }
 
   buildFeatures {
