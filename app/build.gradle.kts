@@ -8,12 +8,12 @@ plugins {
 
 android {
     namespace = "com.example"
-    compileSdk = 37
+    compileSdk = 36          // ← 37 မှ 36 ကို ပြောင်း
 
     defaultConfig {
         applicationId = "com.aistudio.galaxytunnel.vjrmqx"
         minSdk = 24
-        targetSdk = 37
+        targetSdk = 36       // ← 37 မှ 36 ကို ပြောင်း
         versionCode = 1
         versionName = "1.0"
 
